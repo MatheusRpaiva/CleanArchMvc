@@ -21,15 +21,19 @@ namespace CleanArchMvc.Infra.Data.Repositories
 
         public async Task<Product> GetById(int? id)
         {
-            return await _context.Products.FindAsync(id);
-        }
-
-        public async Task<Product> GetProductCategory(int? id)
-        {
-            //eager loading
+            //return await _context.Products.FindAsync(id);
+#pragma warning disable CS8603 // Possível retorno de referência nula.
             return await _context.Products.Include(c => c.Category)
                 .SingleOrDefaultAsync(p => p.Id == id);
+#pragma warning restore CS8603 // Possível retorno de referência nula.
         }
+
+        //public async Task<Product> GetProductCategory(int? id)
+        //{
+        //    //eager loading
+        //    return await _context.Products.Include(c => c.Category)
+        //        .SingleOrDefaultAsync(p => p.Id == id);
+        //}
 
         public async Task<IEnumerable<Product>> GetProducts()
         {
