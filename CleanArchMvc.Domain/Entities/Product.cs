@@ -13,7 +13,7 @@ namespace CleanArchMvc.Domain.Entities
         public string Description { get; private set; }
         public decimal Price { get; private set; }
         public int Stock { get; private set; }
-        public string Image { get; private set; }
+        public string? Image { get; private set; }
 
         public Product(String name, string description, decimal price, int stock, string image)
         {
@@ -59,10 +59,10 @@ namespace CleanArchMvc.Domain.Entities
             Description = description;
             Price = price;
             Stock = stock;
-            Image = image;
+            Image = image ?? string.Empty;
         }
 
         public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        public Category? Category { get; set; }
     }
 }
